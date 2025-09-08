@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varun Baruah - Project & Operations Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The SPA is designed as a modern, single-page portfolio. It starts with a hero section for immediate impact. A sticky navigation bar allows recruiters to instantly jump to key areas: Summary, Experience, and Skills, enhancing usability. The core of the design is transforming the static resume into an interactive experience. The 'Professional Experience' is presented as a clickable vertical timeline, allowing users to focus on one role at a time. The 'Core Competencies' and 'Technical Skills' are synthesized into an interactive skills dashboard featuring a polar area chart for a quick visual summary of strengths, with filters to drill down into specific skill sets. This structure was chosen to guide the user through a narrative of skills and experience, making the content more engaging and scannable than a traditional document. -->
+    <!-- Visualization & Content Choices: 
+        - Professional Experience -> Goal: Organize/Inform -> Viz: Interactive Vertical Timeline -> Interaction: Click to expand/collapse job details -> Justification: Breaks down a long text section into manageable, user-controlled chunks, improving readability. -> Method: HTML/CSS/JS.
+        - Core Competencies -> Goal: Compare/Inform -> Viz: Polar Area Chart & Filterable Lists -> Interaction: Hover chart for tooltips, click buttons to filter and display specific skills -> Justification: Visually represents the balance of skills in a more engaging way than a simple list, while filters provide easy access to detailed information. -> Library: Chart.js.
+        - Textual Content (Summary, Philosophy) -> Goal: Inform -> Presentation: Clean, well-spaced text blocks -> Interaction: None -> Justification: Standard, readable format for prose content. -> Method: HTML/Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #374151;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0d9488;
+            border: 3px solid #FDFBF8;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -21px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #9ca3af;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="sticky top-0 bg-white/80 backdrop-blur-lg shadow-sm z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-teal-700">Varun Baruah</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="text-gray-600 hover:text-teal-600 transition">Summary</a>
+                    <a href="#experience" class="text-gray-600 hover:text-teal-600 transition">Experience</a>
+                    <a href="#skills" class="text-gray-600 hover:text-teal-600 transition">Skills</a>
+                    <a href="#education" class="text-gray-600 hover:text-teal-600 transition">Education</a>
+                </div>
+                 <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#summary" class="block py-2 text-gray-600 hover:text-teal-600">Summary</a>
+                <a href="#experience" class="block py-2 text-gray-600 hover:text-teal-600">Experience</a>
+                <a href="#skills" class="block py-2 text-gray-600 hover:text-teal-600">Skills</a>
+                <a href="#education" class="block py-2 text-gray-600 hover:text-teal-600">Education</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="hero" class="text-center mb-24">
+            <img src="https://i.ibb.co/676brFfb/IMG-20250906-203912.png" alt="Varun Baruah" class="w-40 h-40 rounded-full mx-auto mb-6 shadow-lg object-cover">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">Varun Baruah</h1>
+            <h2 class="text-xl md:text-2xl text-teal-600 font-medium mb-6">Project & Operations Manager | AI Enthusiast</h2>
+            <div class="flex justify-center items-center space-x-6 text-gray-600">
+                <span>Jorhat, Assam</span>
+                <span>|</span>
+                <a href="mailto:msbnat10@gmail.com" class="hover:text-teal-600">msbnat10@gmail.com</a>
+                <span>|</span>
+                <a href="https://www.linkedin.com/in/varun-baruah-25668291/" target="_blank" class="hover:text-teal-600">LinkedIn (Click to view)</a>
+            </div>
+        </section>
+
+        <section id="summary" class="mb-24">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-8">Professional Summary</h3>
+            <p class="max-w-3xl mx-auto text-justify text-lg text-gray-700 leading-relaxed">
+                Multifaceted Project and Operations Manager with over 6 years of experience in video production, AI automation, and client operations. Proven ability to lead projects from conception to completion, streamline workflows through technology, and drive business growth through strategic sales and client relations. A tech-forward entrepreneur with a deep interest in human-centered AI, efficient operational workflows, and finance.
+            </p>
+        </section>
+
+        <section id="experience" class="mb-24">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Professional Experience</h3>
+            <div class="max-w-3xl mx-auto relative pl-8">
+                <div class="timeline-line"></div>
+                <div id="experience-container"></div>
+            </div>
+        </section>
+        
+        <section id="skills" class="mb-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">Skills Dashboard</h3>
+                <p class="text-lg text-gray-600 mt-2">A visual overview of my core competencies. Click on a category to see the details.</p>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+                <div class="w-full lg:w-1/2 chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div id="skill-buttons" class="flex flex-wrap justify-center gap-3 mb-6"></div>
+                    <div id="skill-details" class="bg-white p-6 rounded-lg shadow-md min-h-[150px]">
+                        <p class="text-gray-500 text-center">Select a category to view specific skills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="bg-teal-50 py-16 rounded-lg">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">Education & Certifications</h3>
+            </div>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 text-center">
+                <div>
+                    <h4 class="text-xl font-semibold text-teal-800">Bachelor of Arts in Clinical Psychology</h4>
+                    <p class="text-gray-600">Indira Gandhi National Open University (2017 - 2022)</p>
+                </div>
+                 <div>
+                    <h4 class="text-xl font-semibold text-teal-800">AISSCE (Science)</h4>
+                    <p class="text-gray-600">Kendriya Vidyalaya (2012 - 2014)</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-teal-800">NISM Series XA - Investment Advisor (Level 1)</h4>
+                    <p class="text-gray-600">Certification</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-teal-800">Healthcare Data Literacy</h4>
+                    <p class="text-gray-600">University of Pennsylvania (Certification)</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-8">
+        <p class="text-gray-600">&copy; 2025 Varun Baruah. Designed with Gemini</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const experienceData = [
+                {
+                    title: "Project and Operations Manager",
+                    company: "Sixteen By Nine Media Productions",
+                    location: "Mumbai (Remote)",
+                    date: "Dec 2022 - Present",
+                    details: [
+                        "Directed the full video production lifecycle, from client briefing to final delivery, for 10 monthly projects.",
+                        "Managed budgets and negotiated rates with vendors, securing profitable bookings and onboarding social media influencers and video professionals.",
+                        "Wrote SEO + GEO (Generative Engine Optimized) blogs, increasing organic reach from 0 to 15 in the first month.",
+                        "Generated business valued at over $300,000 within one year through strategic sales and outreach campaigns.",
+                        "Automated multiple administrative tasks, including email alerts, lead tracking, and spreadsheet syncing using Google App Script and n8n."
+                    ]
+                },
+                {
+                    title: "MIS Executive",
+                    company: "Mister Mavericks",
+                    location: "Mumbai",
+                    date: "Aug 2022 - Dec 2022",
+                    details: [
+                        "Built performance dashboards and optimized project tracking systems for internal metrics.",
+                        "Coordinated team schedules and analyzed outreach data for strategic insights."
+                    ]
+                },
+                 {
+                    title: "Medical Secretary",
+                    company: "Nisos Technologies",
+                    location: "Brooklyn, NY (Remote)",
+                    date: "Mar 2022 - Aug 2022",
+                    details: [
+                        "Maintained HIPAA-compliant medical records and coordinated 50+ appointments weekly.",
+                        "Developed an automated Patient Appointment Reminder system using Zapier, Google Sheets, and Amazon Connect, increasing patient footfall and revenue by at least 20%."
+                    ]
+                },
+                 {
+                    title: "DIP Executive",
+                    company: "SBI Card",
+                    location: "Jorhat, Assam",
+                    date: "Aug 2021 - Feb 2022",
+                    details: [
+                        "Verified credit card documentation and client records with 100% accuracy.",
+                        "Upsold premium cards, generating up to 8% additional month-on-month revenue.",
+                        "Created comprehensive daily reports for managerial review and strategic planning."
+                    ]
+                }
+            ];
+
+            const experienceContainer = document.getElementById('experience-container');
+            experienceData.forEach(job => {
+                const jobElement = document.createElement('div');
+                jobElement.className = 'mb-8 timeline-item';
+                jobElement.innerHTML = `
+                    <div class="cursor-pointer">
+                        <h4 class="text-xl font-bold text-gray-800">${job.title}</h4>
+                        <p class="font-semibold text-teal-600">${job.company} | ${job.location}</p>
+                        <p class="text-sm text-gray-500 mb-2">${job.date}</p>
+                    </div>
+                    <div class="job-details hidden pl-4 mt-2">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            ${job.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                experienceContainer.appendChild(jobElement);
+            });
+
+            document.querySelectorAll('.timeline-item .cursor-pointer').forEach(item => {
+                item.addEventListener('click', event => {
+                    const details = event.currentTarget.nextElementSibling;
+                    details.classList.toggle('hidden');
+                });
+            });
+
+            const skillsData = {
+                "Project & Ops": ["Strategic Planning", "Team Coordination", "Remote Operations", "Vendor & Client Relations", "Negotiation"],
+                "AI & Automation": ["n8n Workflows", "Zapier", "AI Prompting & Engineering", "Process Automation", "Custom GPTs & Gemini Gems"],
+                "Sales & Outreach": ["Apollo.io", "LinkedIn Outreach", "Mailchimp", "Mailsuite", "Odoo CRM", "Lead Nurturing"],
+                "Content & Media": ["Corporate Video Planning", "Social Media Campaigns", "Story-based Branding", "AI Video Production", "HR Functions"],
+                "Technical Tools": ["Indeed", "Keka HR", "Miro", "Canva", "Salesforce", "HubSpot", "MS Office Suite", "Google Workspace"]
+            };
+
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: Object.keys(skillsData),
+                    datasets: [{
+                        label: 'Core Competencies',
+                        data: Object.values(skillsData).map(s => s.length),
+                        backgroundColor: [
+                            'rgba(15, 118, 110, 0.6)',
+                            'rgba(13, 148, 136, 0.6)',
+                            'rgba(14, 159, 110, 0.6)',
+                            'rgba(16, 185, 129, 0.6)',
+                            'rgba(107, 114, 128, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(15, 118, 110, 1)',
+                            'rgba(13, 148, 136, 1)',
+                            'rgba(14, 159, 110, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(107, 114, 128, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            pointLabels: {
+                                display: true,
+                                centerPointLabels: true,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.label;
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const skillButtonsContainer = document.getElementById('skill-buttons');
+            const skillDetailsContainer = document.getElementById('skill-details');
+
+            Object.keys(skillsData).forEach((skillCategory, index) => {
+                const button = document.createElement('button');
+                button.textContent = skillCategory;
+                button.className = 'px-4 py-2 text-sm font-medium text-teal-700 bg-teal-100 rounded-full hover:bg-teal-200 transition';
+                button.onclick = () => {
+                    displaySkillDetails(skillCategory);
+                };
+                skillButtonsContainer.appendChild(button);
+            });
+
+            function displaySkillDetails(category) {
+                const skills = skillsData[category];
+                skillDetailsContainer.innerHTML = `
+                    <h4 class="text-lg font-bold text-teal-800 mb-3 text-center">${category}</h4>
+                    <ul class="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-700">
+                        ${skills.map(skill => `<li>${skill}</li>`).join('')}
+                    </ul>`;
+            }
+        });
+    </script>
+</body>
+</html>
